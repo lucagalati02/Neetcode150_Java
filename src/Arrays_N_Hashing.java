@@ -124,4 +124,23 @@ public class Arrays_N_Hashing {
         return res;
     }
     //}
+
+    public int[] productExceptSelf(int[] nums) {
+        //https://neetcode.io/problems/products-of-array-discluding-self
+        //44:58
+        int[] output = new int[nums.length];
+
+        //prefix
+        int prefix = 1;
+        for (int i = 0; i < nums.length; i++) {
+            output[i] = prefix;
+            prefix *= nums[i];
+        }
+        int postfix = 1;
+        for (int i = nums.length - 1; i >= 0; i--) {
+            output[i] *= postfix;
+            postfix *= nums[i];
+        }
+        return output;
+    }
 }
