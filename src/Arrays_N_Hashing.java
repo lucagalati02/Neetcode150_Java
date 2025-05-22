@@ -94,4 +94,34 @@ public class Arrays_N_Hashing {
 
         return result;
     }
+
+    //{
+    //https://neetcode.io/problems/string-encode-and-decode
+    //36:23
+    public String encode(List<String> strs) {
+        StringBuilder sb = new StringBuilder();
+        for (String s : strs) {
+            sb.append(s.length())
+                    .append('#')
+                    .append(s);
+        }
+        return sb.toString();
+    }
+
+    public List<String> decode(String s) {
+        List<String> res = new ArrayList<>();
+        int i = 0, n = s.length();
+        while (i < n) {
+            // find the '#' that separates the length prefix
+            int j = s.indexOf('#', i);
+            int len = Integer.parseInt(s.substring(i, j));
+            // extract the next 'len' characters as the string
+            String str = s.substring(j + 1, j + 1 + len);
+            res.add(str);
+            // move past this entry
+            i = j + 1 + len;
+        }
+        return res;
+    }
+    //}
 }
