@@ -45,4 +45,26 @@ public class Arrays_N_Hashing {
         }
         return ans;
     }
+
+    public List<List<String>> groupAnagrams(String[] strs) {
+        //https://neetcode.io/problems/anagram-groups
+        //24:02
+        HashMap<String, ArrayList<String>> map = new HashMap<>();
+
+        for (String str : strs) {
+            char[] temp = str.toCharArray();
+            Arrays.sort(temp);
+            String s_temp = Arrays.toString(temp);
+
+            if (map.containsKey(s_temp)) {
+                ArrayList<String> new_arr = map.get(s_temp);
+                new_arr.add(str);
+            } else {
+                ArrayList<String> new_arr = new ArrayList<>();
+                new_arr.add(str);
+                map.put(s_temp, new_arr);
+            }
+        }
+        return new ArrayList<>(map.values());
+    }
 }
