@@ -143,4 +143,8 @@ public class Arrays_N_Hashing {
         }
         return output;
     }
+
+    public boolean isValidSudoku(char[][] board) {
+        //D.N.C.
+    }
 }
