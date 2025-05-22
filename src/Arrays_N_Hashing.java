@@ -67,4 +67,31 @@ public class Arrays_N_Hashing {
         }
         return new ArrayList<>(map.values());
     }
+
+    public int[] topKFrequent(int[] nums, int k) {
+        //https://neetcode.io/problems/top-k-elements-in-list
+        //45:00
+        HashMap<Integer, Integer> map = new HashMap<>();
+
+        for (Integer num : nums) {
+            if (map.containsKey(num)) {
+                int pointer = map.get(num);
+                pointer++;
+                map.put(num, pointer);
+            }
+            else {
+                map.put(num, 1);
+            }
+        }
+
+        List<Integer> keys = new ArrayList<>(map.keySet());
+        keys.sort((a, b) -> Integer.compare(map.get(b), map.get(a)));
+
+        int[] result = new int[k];
+        for (int i = 0; i < k; i++) {
+            result[i] = keys.get(i);
+        }
+
+        return result;
+    }
 }
