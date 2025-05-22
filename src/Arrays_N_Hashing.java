@@ -147,4 +147,29 @@ public class Arrays_N_Hashing {
     public boolean isValidSudoku(char[][] board) {
         //D.N.C.
     }
+
+    public int longestConsecutive(int[] nums) {
+        //https://neetcode.io/problems/longest-consecutive-sequence
+        //25:04
+        if (nums.length == 0) return 0;
+
+        Set<Integer> numSet = new HashSet<>();
+        for (int n : nums) {
+            numSet.add(n);
+        }
+
+        int longest = 0;
+
+        for (int n : numSet) {
+            if (!numSet.contains(n - 1)) {
+                int length = 1;
+                while (numSet.contains(n + length)) {
+                    length++;
+                }
+                longest = Math.max(longest, length);
+            }
+        }
+
+        return longest;
+    }
 }
