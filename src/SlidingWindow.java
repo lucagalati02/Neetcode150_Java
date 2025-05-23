@@ -1,3 +1,5 @@
+import java.io.*;
+import java.util.*;
 public class SlidingWindow {
     public int maxProfit(int[] prices) {
         //https://neetcode.io/problems/buy-and-sell-crypto
@@ -16,5 +18,23 @@ public class SlidingWindow {
         }
 
         return maxProfit;
+    }
+
+    public int lengthOfLongestSubstring(String s) {
+        //https://neetcode.io/problems/longest-substring-without-duplicates
+        //45:07
+        HashSet<Character> charSet = new HashSet<>();
+        int l = 0;
+        int res = 0;
+
+        for (int r = 0; r < s.length(); r++) {
+            while (charSet.contains(s.charAt(r))) {
+                charSet.remove(s.charAt(l));
+                l++;
+            }
+            charSet.add(s.charAt(r));
+            res = Math.max(res, r - l + 1);
+        }
+        return res;
     }
 }
