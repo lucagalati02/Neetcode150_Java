@@ -57,7 +57,78 @@ public class Stacks {
     }
     //}
 
-    
+    //{
+    //https://neetcode.io/problems/generate-parentheses
+    //28:35
+    public List<String> generateParenthesis(int n) {
+        int open = 0;
+        int closed = 0;
+        StringBuilder stack = new StringBuilder();
+        ArrayList<String> result = new ArrayList<>();
+        generateParenthesisBacktrack(open, closed, n, stack, result);
+        return result;
+    }
+    public void generateParenthesisBacktrack(int open, int closed, int n, StringBuilder stack, ArrayList<String> result) {
+        if (open == closed && open == n) {
+            result.add(stack.toString());
+            return;
+        }
+
+        if (open < n) {
+            stack.append('(');
+            generateParenthesisBacktrack(open+1, closed, n, stack, result);
+            stack.deleteCharAt(stack.length() - 1);
+        }
+
+        if (closed < open) {
+            stack.append(')');
+            generateParenthesisBacktrack(open, closed+1, n, stack, result);
+            stack.deleteCharAt(stack.length() - 1);
+        }
+    }
+    //}
+
+    public int[] dailyTemperatures(int[] temperatures) {
+        //https://neetcode.io/problems/daily-temperatures
+        //45:22
+        int[] result = new int[temperatures.length];
+        Stack<int[]> stack = new Stack<>();
+
+        for (int i = 0; i < temperatures.length; i++) {
+            result[i] = 0;
+            while (!stack.isEmpty() && temperatures[i] > stack.peek()[0]) {
+                int[] pair = stack.pop();
+                int prevIndex = pair[1];
+                result[prevIndex] = i - prevIndex;
+            }
+            stack.push(new int[]{temperatures[i], i});
+        }
+        return result;
+    }
+
+    public int carFleet(int target, int[] position, int[] speed) {
+        //https://neetcode.io/problems/car-fleet
+        //58:36
+        int n = position.length;
+        int[][] pair = new int[n][2];
+        for (int i = 0; i < n; i++) {
+            pair[i][0] = position[i];
+            pair[i][1] = speed[i];
+        }
+        Arrays.sort(pair, (a, b) -> Integer.compare(b[0], a[0]));
+
+        int fleets = 0;
+        double slowestTime = 0;
+
+        for (int[] p : pair) {
+            double t = (double)(target - p[0]) / p[1];
+            if (t > slowestTime) {
+                fleets++;
+                slowestTime = t;
+            }
+        }
+        return fleets;
+    }
 }
 
 //{
