@@ -37,4 +37,8 @@ public class SlidingWindow {
         }
         return res;
     }
+
+    public int characterReplacement(String s, int k) {
+        //D.N.C.
+    }
 }
