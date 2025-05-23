@@ -81,4 +81,25 @@ public class TwoPointers {
 
         return res;
     }
+
+    public int maxArea(int[] heights) {
+        //https://neetcode.io/problems/max-water-container
+        //25:00
+        int max = 0;
+        int left = 0;
+        int right = heights.length - 1;
+
+        while (left < right) {
+            int area = (right - left) * Math.min(heights[left], heights[right]);
+            max = Math.max(max, area);
+
+            if (heights[left] < heights[right]) {
+                left++;
+            }
+            else {
+                right--;
+            }
+        }
+        return max;
+    }
 }
