@@ -65,6 +65,29 @@ public class LinkedLists {
     void reorderList(ListNode head) {
         //D.N.C.
     }
+
+    ListNode removeNthFromEnd(ListNode head, int n) {
+        //https://neetcode.io/problems/remove-node-from-end-of-linked-list
+        //34:45
+        int length = 0;
+        ListNode current = head;
+        while (current != null) {
+            length++;
+            current = current.next;
+        }
+
+        if (n == length) {
+            return head.next;
+        }
+
+        int stopAt = length - n - 1;
+        current = head;
+        for (int i = 0; i < stopAt; i++) {
+            current = current.next;
+        }
+        current.next = current.next.next;
+        return head;
+    }
 }
 
 class ListNode {
