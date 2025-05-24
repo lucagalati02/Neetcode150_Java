@@ -43,6 +43,24 @@ public class LinkedLists {
 
         return head.next;
     }
+
+    public boolean hasCycle(ListNode head) {
+        //https://neetcode.io/problems/linked-list-cycle-detection
+        //4:37
+        ListNode node = head;
+        HashSet<ListNode> set = new HashSet<>();
+
+        while (node != null) {
+            if (!set.contains(node)) {
+                set.add(node);
+                node = node.next;
+            }
+            else {
+                return true;
+            }
+        }
+        return false;
+    }
 }
 
 class ListNode {
