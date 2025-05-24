@@ -44,7 +44,7 @@ public class LinkedLists {
         return head.next;
     }
 
-    public boolean hasCycle(ListNode head) {
+    boolean hasCycle(ListNode head) {
         //https://neetcode.io/problems/linked-list-cycle-detection
         //4:37
         ListNode node = head;
@@ -60,6 +60,10 @@ public class LinkedLists {
             }
         }
         return false;
+    }
+
+    void reorderList(ListNode head) {
+        //D.N.C.
     }
 }
 
