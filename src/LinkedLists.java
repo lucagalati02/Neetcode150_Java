@@ -88,6 +88,29 @@ public class LinkedLists {
         current.next = current.next.next;
         return head;
     }
+
+    Node copyRandomList(Node head) {
+        //https://neetcode.io/problems/copy-linked-list-with-random-pointer
+        //48:23
+        if (head == null) return null;
+
+        Map<Node,Node> map = new HashMap<>();
+        Node cur = head;
+        while (cur != null) {
+            map.put(cur, new Node(cur.val));
+            cur = cur.next;
+        }
+
+        cur = head;
+        while (cur != null) {
+            Node clone = map.get(cur);
+            clone.next   = map.get(cur.next);   // null-safe: map.get(null) -> null
+            clone.random = map.get(cur.random);
+            cur = cur.next;
+        }
+
+        return map.get(head);
+    }
 }
 
 class ListNode {
@@ -96,4 +119,16 @@ class ListNode {
     ListNode() {}
     ListNode(int val) { this.val = val; }
     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+}
+
+class Node {
+    int val;
+    Node next;
+    Node random;
+
+    public Node(int val) {
+        this.val = val;
+        this.next = null;
+        this.random = null;
+    }
 }
