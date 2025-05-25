@@ -111,6 +111,44 @@ public class LinkedLists {
 
         return map.get(head);
     }
+
+    ListNode addTwoNumbers(ListNode l1, ListNode l2) {
+        //https://neetcode.io/problems/add-two-numbers
+        //15:46
+        StringBuilder sb1 = new StringBuilder();
+        StringBuilder sb2 = new StringBuilder();
+
+        while (l1 != null) {
+            sb1.append(l1.val);
+            l1 = l1.next;
+        }
+
+        while (l2 != null) {
+            sb2.append(l2.val);
+            l2 = l2.next;
+        }
+
+        String str1 = sb1.reverse().toString();
+        String str2 = sb2.reverse().toString();
+
+        java.math.BigInteger num1 = new java.math.BigInteger(str1);
+        java.math.BigInteger num2 = new java.math.BigInteger(str2);
+        java.math.BigInteger sum = num1.add(num2);
+
+        // Reverse the result again to match the required linked list format (least significant digit first)
+        String sumString = new StringBuilder(sum.toString()).reverse().toString();
+
+        // Build the result list
+        ListNode head = new ListNode(Character.getNumericValue(sumString.charAt(0)));
+        ListNode current = head;
+
+        for (int i = 1; i < sumString.length(); i++) {
+            current.next = new ListNode(Character.getNumericValue(sumString.charAt(i)));
+            current = current.next;
+        }
+
+        return head;
+    }
 }
 
 class ListNode {
