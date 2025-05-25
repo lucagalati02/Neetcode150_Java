@@ -149,6 +149,22 @@ public class LinkedLists {
 
         return head;
     }
+
+    public int findDuplicate(int[] nums) {
+        //https://neetcode.io/problems/find-duplicate-integer
+        //3:18
+        HashSet<Integer> set = new HashSet<>();
+
+        for (int i = 0; i < nums.length; i++) {
+            if (!set.contains(nums[i])) {
+                set.add(nums[i]);
+            }
+            else {
+                return nums[i];
+            }
+        }
+        return -1;
+    }
 }
 
 class ListNode {
