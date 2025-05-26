@@ -66,6 +66,19 @@ public class Trees {
         return new int[]{balanced ? 1 : 0, height};
     }
     //}
+
+    boolean isSameTree(TreeNode p, TreeNode q) {
+        //https://neetcode.io/problems/same-binary-tree
+        //3:44
+        if (p == null && q == null) {
+            return true;
+        }
+        if (p != null && q != null && p.val == q.val) {
+            return isSameTree(p.left, q.left) && isSameTree(p.right, q.right);
+        } else {
+            return false;
+        }
+    }
 }
 
 class TreeNode {
