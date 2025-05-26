@@ -1,3 +1,5 @@
+import java.util.Arrays;
+
 public class BinarySearching {
     //https://neetcode.io/problems/binary-search
     //7:34
@@ -62,6 +64,35 @@ public class BinarySearching {
         }
 
         return false;
+    }
+
+    public int minEatingSpeed(int[] piles, int h) {
+        //https://neetcode.io/problems/eating-bananas
+        //29:53
+        Arrays.sort(piles);
+
+        int left = 1;
+        int right = piles[piles.length - 1];
+        int k = right;
+
+        while (left <= right) {
+            int rate = left + (right - left) / 2;
+
+            int hours = 0;
+            for (int pile : piles) {
+                hours += (int) Math.ceil((double) pile / rate);
+            }
+
+            if (hours <= h) {
+                k = rate;
+                right = rate - 1;
+            }
+            else {
+                left = rate + 1;
+            }
+        }
+
+        return k;
     }
 
 }
