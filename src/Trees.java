@@ -15,6 +15,16 @@ public class Trees {
 
         return root;
     }
+
+    int maxDepth(TreeNode root) {
+        //https://neetcode.io/problems/depth-of-binary-tree
+        //4:07
+        if (root == null) {
+            return 0;
+        }
+
+        return 1 + Math.max(maxDepth(root.left), maxDepth(root.right));
+    }
 }
 
 class TreeNode {
